@@ -121,9 +121,9 @@ the same (or a compatible) set of rules to restore the `Spanned`.
 Known Limitations
 -----------------
 - Two start tags in sequence may be flipped in order during conversion.
-So, for example, suppose you had "<b><i>Foo</i></b>", and you converted
+So, for example, suppose you had `<b><i>Foo</i></b>`, and you converted
 that into a `Spanned`, then back into XHTML. The resulting XHTML could
-be the same or could be "<i><b>Foo</b></i>".
+be the same or could be `<i><b>Foo</b></i>`.
 
 - It is possible that multiple `<span>` elements will be applied for the
 same text (e.g., it is adjusted using a `RelativeSizeSpan` and a
