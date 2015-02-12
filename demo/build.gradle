@@ -1,0 +1,39 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        applicationId "com.commonsware.cwac.richtextutils.demo"
+        minSdkVersion 13
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            assets.srcDirs = ['../testAssets']
+        }
+    }
+}
+
+repositories {
+    maven {
+        url "https://repo.commonsware.com.s3.amazonaws.com"
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v13:21.0.3'
+    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    debugCompile project(':richtextutils')
+    releaseCompile 'com.commonsware.cwac:richtextutils:0.1.+'
+}

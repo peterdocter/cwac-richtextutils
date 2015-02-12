@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+
+dependencies {
+    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
+}
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion "19.1.0"
+
+    defaultConfig {
+        minSdkVersion 8
+
+        testApplicationId "com.commonsware.cwac.richtextutils.test"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+    }
+
+    sourceSets {
+        androidTest {
+            assets.srcDirs = ['../testAssets']
+        }
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt' // required for no good reason...
+    }
+}
+
+// based on http://stackoverflow.com/a/23672732/115145
+
+android.libraryVariants.all { variant ->
+    task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
+        description "Generates Javadoc for $variant.name."
+        source = variant.javaCompile.source
+        ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+        classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+//        options.links("http://docs.oracle.com/javase/7/docs/api/");
+//        options.links("http://d.android.com/reference/");
+        exclude '**/BuildConfig.java'
+        exclude '**/R.java'
+    }
+}
+
+apply plugin: 'maven'
+ 
+uploadArchives {
+    repositories.mavenDeployer {
+        pom.groupId = PUBLISH_GROUP_ID
+        pom.artifactId = PUBLISH_ARTIFACT_ID
+        pom.version = PUBLISH_VERSION
+
+        repository(url: LOCAL_REPO)
+    }
+}
+
