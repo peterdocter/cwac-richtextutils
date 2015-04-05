@@ -1,6 +1,9 @@
 CWAC RichTextUtils: Making Rich Text Cheaper
 ============================================
 
+**THE CLASSES FROM THIS PROJECT HAVE BEEN MIGRATED TO THE [CWAC-RichEdit](https://github.com/commonsguy/cwac-richedit)
+LIBRARY AND WILL BE SUPPORTED THERE. THIS REPOSITORY IS HERE PURELY FOR HISTORICAL PURPOSES.**
+
 Android's `TextView` and subclasses support `Spanned`
 objects that blend in formatting rules along with text.
 This library provides some utilities for working with
